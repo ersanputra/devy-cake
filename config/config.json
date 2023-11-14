@@ -2,7 +2,7 @@
   "development": {
     "username": "default",
     "password": "PdC6whXjHnA8",
-    "database": "db-webnews",
+    "database": "verceldb",
     "host": "ep-young-poetry-01205744.ap-southeast-1.postgres.vercel-storage.com",
     "dialect": "postgres",
     "timezone": "+07:00",
