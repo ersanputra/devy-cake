@@ -1,0 +1,31 @@
+{
+  "development": {
+    "username": "default",
+    "password": "PdC6whXjHnA8",
+    "database": "db-webnews",
+    "host": "ep-young-poetry-01205744.ap-southeast-1.postgres.vercel-storage.com",
+    "dialect": "postgres",
+    "timezone": "+07:00",
+    "dialectOptions": {
+      "ssl": {
+        "require": true, 
+        "rejectUnauthorized": false
+      },
+      "sslmode": "require"
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
