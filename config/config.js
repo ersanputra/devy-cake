@@ -1,9 +1,11 @@
-{
+require('dotenv').config();
+
+module.exports = {
   "development": {
-    "username": "default",
-    "password": "PdC6whXjHnA8",
-    "database": "verceldb",
-    "host": "ep-young-poetry-01205744.ap-southeast-1.postgres.vercel-storage.com",
+    "username": process.env.POSTGRES_USER,
+    "password": process.env.POSTGRES_PASSWORD,
+    "database": process.env.POSTGRES_DATABASE,
+    "host": process.env.POSTGRES_HOST,
     "dialect": "postgres",
     "timezone": "+07:00",
     "dialectOptions": {
