@@ -6,5 +6,7 @@ const cakeController  = new CakeController();
 
 cakeRouter.get('/', cakeController.getAllCakes);
 cakeRouter.post('/', cakeController.addCake);
+cakeRouter.delete('/:cake_id', cakeController.deleteCakeById);
+
 
 module.exports = cakeRouter;
