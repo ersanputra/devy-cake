@@ -14,7 +14,8 @@ class UserController {
             const user = await userService.createUser({ email, password, full_name, phone_number, role, profile_image });
             res.status(200).json({
                 status: "success",
-                data: user
+                data: user,
+                message: 'Akun berhasil di daftarkan !!'
             });
         } catch (error) {
             res.status(500).json({
