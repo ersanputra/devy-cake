@@ -30,7 +30,7 @@ class CartController {
                 data: cart
             });
         } catch (error) {
-            res.status(500).json({
+            res.status(400).json({
                 status: "failed",
                 message: error.message,
             });

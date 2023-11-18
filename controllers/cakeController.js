@@ -6,9 +6,9 @@ class CakeController {
         try {
             const cakeData = req.body;
             const cake = await cakeService.addCake(cakeData);
-            res.status(201).json(cake);
+            res.status(200).json(cake);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -17,7 +17,7 @@ class CakeController {
             const cakes = await cakeService.getAllCakes();
             res.status(200).json(cakes);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            res.status(400).json({ message: error.message });
         }
     }
 }
