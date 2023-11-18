@@ -38,6 +38,7 @@ class UserController {
                 email: user.email,
                 phone_number: user.phone_number,
                 profile_image: user.profile_image,
+                role: user.role,
                 accessToken: accessToken,
       
               };
