@@ -59,6 +59,28 @@ class UserService {
         return await bcrypt.compare(inputPassword, storedPasswordHash);
       }
 
+      async deleteUser(userId) {
+        try {
+            // Cari pengguna berdasarkan ID
+            const user = await User.findByPk(userId);
+
+            if (!user) {
+                throw new Error('Pengguna tidak ditemukan');
+            }
+
+            // Hapus pengguna
+            await User.destroy({
+                where: { id: userId }
+            });
+
+            return { message: "Pengguna berhasil dihapus." };
+        } catch (error) {
+            console.error('Error saat menghapus pengguna:', error);
+            throw error;
+        }
+    }
+
+
     // ... (kode lainnya)
 }
 

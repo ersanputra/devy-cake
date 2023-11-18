@@ -55,6 +55,25 @@ class UserController {
             });
         }
     }
+
+    async deleteUser(req, res) {
+        try {
+            const userId = req.params.id; // Mendapatkan ID pengguna dari parameter URL
+
+            // Panggil metode deleteUser dari UserService
+            const message = await userService.deleteUser(userId);
+
+            res.status(200).json({
+                status: "success",
+                message: message
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "failed",
+                message: error.message
+            });
+        }
+    }
 }
 
 module.exports = UserController;
