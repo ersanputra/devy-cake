@@ -8,7 +8,7 @@ const uploadImage = async (req, res) => {
         res.render('displayImage', { imageUrl: imageUrl });
     } catch (error) {
         console.error('Error uploading the image:', error);
-        res.status(500).send('Internal Server Error.');
+        res.status(400).send('Internal Server Error.');
     }
 };
 
@@ -21,7 +21,7 @@ const uploadImageApi = async (req, res) => {
         });
     } catch (error) {
         console.error('Error uploading the image:', error);
-        res.status(500).send('Internal Server Error.');
+        res.status(400).send('Internal Server Error.');
     }
 };
 
