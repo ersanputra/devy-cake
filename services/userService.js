@@ -70,7 +70,7 @@ class UserService {
 
             // Hapus pengguna
             await User.destroy({
-                where: { id: userId }
+                where: { user_id: userId }
             });
 
             return { message: "Pengguna berhasil dihapus." };
