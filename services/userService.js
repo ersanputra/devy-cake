@@ -23,6 +23,7 @@ class UserService {
             // Membuat user baru
             const user = await User.create({
                 ...userData,
+                role: "USER",
                 password: hashedPassword
             });
 
