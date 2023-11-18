@@ -18,7 +18,7 @@ class UserController {
                 message: 'Akun berhasil di daftarkan !!'
             });
         } catch (error) {
-            res.status(500).json({
+            res.status(400).json({
                 status: "failed",
                 message: error.message,
             });
