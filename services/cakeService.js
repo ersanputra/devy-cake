@@ -45,7 +45,7 @@ class CakeService {
                 throw new Error('Tidak ada kue yang dihapus dengan cake_id tersebut');
             }
 
-            return { message: 'Kue berhasil dihapus', deleted: result };
+            return { message: 'Kue berhasil dihapus' };
         } catch (error) {
             console.error('Error saat menghapus kue:', error);
             throw error;
