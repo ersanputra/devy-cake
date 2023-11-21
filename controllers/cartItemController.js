@@ -6,8 +6,8 @@ class CartItemController {
     // Add a new cart item
     async addCartItem(req, res) {
         try {
-            const { cartId, cakeId, quantity, subTotal } = req.body;
-            const newCartItem = await cartItemService.addCartItem(cartId, cakeId, quantity, subTotal);
+            const { userId, cakeId, quantity, subTotal } = req.body;
+            const newCartItem = await cartItemService.addCartItem(userId, cakeId, quantity, subTotal);
             res.status(201).json({
                 status: "success",
                 data: newCartItem
@@ -75,8 +75,8 @@ class CartItemController {
     // List all cart items for a specific cart
     async listCartItems(req, res) {
         try {
-            const cartId = req.params.cartId;
-            const cartItems = await cartItemService.listCartItems(cartId);
+            const userId = req.params.userId;
+            const cartItems = await cartItemService.listCartItems(userId);
             res.status(200).json({
                 status: "success",
                 data: cartItems

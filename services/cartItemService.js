@@ -2,7 +2,7 @@ const { CartItem, Cake } = require("../models");
 
 class CartItemService {
       // Add a new cart item
-      async addCartItem(cartId, cakeId, quantity) {
+      async addCartItem(userId, cakeId, quantity) {
         try {
           // Fetch cake details based on cakeId
           const cake = await Cake.findByPk(cakeId);
@@ -17,7 +17,7 @@ class CartItemService {
     
           // Check if the cart item already exists
           let cartItem = await CartItem.findOne({
-            where: { cart_id: cartId, cake_id: cakeId }
+            where: { user_id: userId, cake_id: cakeId }
           });
     
           if (cartItem) {
@@ -31,7 +31,7 @@ class CartItemService {
     
             // Create new cart item with fetched cake details
             cartItem = await CartItem.create({
-              cart_id: cartId,
+              user_id: userId,
               cake_id: cakeId,
               quantity,
               sub_total: subTotal,
@@ -85,10 +85,10 @@ class CartItemService {
   }
 
   // List all cart items for a specific cart
-  async listCartItems(cartId) {
+  async listCartItems(userId) {
     try {
       const cartItems = await CartItem.findAll({
-        where: { cart_id: cartId },
+        where: { user_id: userId },
       });
       return cartItems;
     } catch (error) {
