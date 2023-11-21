@@ -15,16 +15,28 @@ class CartItemService {
             throw new Error('This cake is currently not available');
           }
     
-          // Calculate sub_total
-          const subTotal = cake.price * quantity;
-    
-          // Create cart item with fetched cake details
-          const cartItem = await CartItem.create({
-            cart_id: cartId,
-            cake_id: cakeId,
-            quantity,
-            sub_total: subTotal,
+          // Check if the cart item already exists
+          let cartItem = await CartItem.findOne({
+            where: { cart_id: cartId, cake_id: cakeId }
           });
+    
+          if (cartItem) {
+            // Update quantity and sub_total if item exists
+            cartItem.quantity += quantity;
+            cartItem.sub_total = cartItem.quantity * cake.price;
+            await cartItem.save();
+          } else {
+            // Calculate sub_total for new item
+            const subTotal = cake.price * quantity;
+    
+            // Create new cart item with fetched cake details
+            cartItem = await CartItem.create({
+              cart_id: cartId,
+              cake_id: cakeId,
+              quantity,
+              sub_total: subTotal,
+            });
+          }
     
           return cartItem;
         } catch (error) {
