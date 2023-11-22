@@ -16,9 +16,6 @@ app.use(cors());
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-
-
-
 app.post('/api/upload/profile', upload.single('image'), imageController.uploadImageApi);
 
 // Konfigurasi middleware

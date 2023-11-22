@@ -89,6 +89,9 @@ class CartItemService {
     try {
       const cartItems = await CartItem.findAll({
         where: { user_id: userId },
+        include: [{
+          model: Cake
+        }]
       });
       return cartItems;
     } catch (error) {

@@ -19,7 +19,7 @@ module.exports = {
   "test": {
     "username": "postgres",
     "password": "admin",
-    "database": "db_test",
+    "database": "db_devvi",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
