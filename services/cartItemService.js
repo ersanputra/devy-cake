@@ -46,6 +46,33 @@ class CartItemService {
         }
       }
 
+      async updateCartItemQuantity(cartItemId, newQuantity) {
+        try {
+          const cartItem = await CartItem.findByPk(cartItemId);
+          if (!cartItem) {
+            throw new Error('Cart tidak ditemukan');
+          }
+      
+          // Update the quantity
+          cartItem.quantity = newQuantity;
+      
+          // Recalculate sub_total
+          const cake = await Cake.findByPk(cartItem.cake_id);
+          if (!cake) {
+            throw new Error('Cake Tidak Ditemukan');
+          }
+          cartItem.sub_total = newQuantity * cake.price;
+      
+          // Save the updated cart item
+          await cartItem.save();
+      
+          return cartItem;
+        } catch (error) {
+          console.error("Error updating cart item quantity:", error);
+          throw error; // Rethrow the error to be handled by the caller
+        }
+      }
+
   // Get a cart item by ID
   async getCartItemById(cartItemId) {
     try {

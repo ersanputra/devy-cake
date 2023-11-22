@@ -89,6 +89,23 @@ class CartItemController {
         }
     }
 
+    async updateCartItemQuantity(req, res) {
+        try {
+            const cartItemId = req.params.id;
+            const { newQuantity } = req.body;
+            const updatedCartItem = await cartItemService.updateCartItemQuantity(cartItemId, newQuantity);
+            res.status(200).json({
+                status: "success",
+                data: updatedCartItem
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "failed",
+                message: error.message,
+            });
+        }
+    }
+
     
 }
 

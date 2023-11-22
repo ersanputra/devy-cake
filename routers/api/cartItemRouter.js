@@ -17,5 +17,6 @@ cartItemRouter.delete('/:id', cartItemController.deleteCartItem);
 
 // Route to list all cart items for a specific cart
 cartItemRouter.get('/list/:userId', cartItemController.listCartItems);
+cartItemRouter.put('/:id/quantity', cartItemController.updateCartItemQuantity);
 
 module.exports = cartItemRouter;
