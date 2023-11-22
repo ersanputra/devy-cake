@@ -92,8 +92,8 @@ class CartItemController {
     async updateCartItemQuantity(req, res) {
         try {
             const cartItemId = req.params.id;
-            const { newQuantity } = req.body.quantity;
-            const updatedCartItem = await cartItemService.updateCartItemQuantity(cartItemId, newQuantity);
+            const { quantity } = req.body;
+            const updatedCartItem = await cartItemService.updateCartItemQuantity(cartItemId, quantity);
             res.status(200).json({
                 status: "success",
                 data: updatedCartItem

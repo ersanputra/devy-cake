@@ -48,6 +48,7 @@ class CartItemService {
 
       async updateCartItemQuantity(cartItemId, newQuantity) {
         try {
+          console.log(newQuantity);
           const cartItem = await CartItem.findByPk(cartItemId);
           if (!cartItem) {
             throw new Error('Cart tidak ditemukan');
