@@ -112,6 +112,27 @@ class CartItemService {
     }
   }
 
+  async deleteCartItemsByUserId(userId) {
+    try {
+        // Find all cart items with the given user_id
+        const cartItems = await CartItem.findAll({
+            where: { user_id: userId }
+        });
+
+        // Check if there are any items to delete
+        if (cartItems.length > 0) {
+            // Loop through each item and delete
+            for (const item of cartItems) {
+                await item.destroy();
+            }
+            return true; // Return true if items were found and deleted
+        }
+        return false; // Return false if no items were found
+    } catch (error) {
+        console.error("Error deleting cart items:", error);
+    }
+}
+
   // List all cart items for a specific cart
   async listCartItems(userId) {
     try {

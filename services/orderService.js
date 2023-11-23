@@ -1,4 +1,11 @@
-const { Order, OrderDetail, Payment } = require("../models");
+const { Order } = require("../models");
+const PaymentService = require('./paymentService');
+const paymentService = new PaymentService();
+const OrderDetailService = require('./orderDetailService');
+const orderDetailService = new OrderDetailService();
+const CartItemService = require('../services/cartItemService');
+const cartItemService = new CartItemService();
+
 
 class OrderService {
 
@@ -60,6 +67,78 @@ class OrderService {
             return newOrder;
         } catch (error) {
             console.error('Gagal membuat order:', error);
+            throw error;
+        }
+    }
+
+    //buat order langsung dengan orderdetail dan payment
+    async addOrderAll(data) {
+        try {
+            //cek dulu data id_address ada tidak
+            let idAddress = "";
+
+            if (data.address_id) {
+                idAddress = data.address_id;
+            } else {
+                const dataAddress = {
+                    user_id: data.user_id,
+                    recipient_name: data.recipient_name,
+                    address: data.address,
+                    phone_number: data.phone_number
+                };
+
+                idAddress = 1;
+            }
+            
+            //ambil data list keranjang
+            const cartItems = await cartItemService.listCartItems(data.user_id);
+            //fungsi hitung total
+            function calculateTotal(cartItems) {
+                return cartItems.reduce((total, item) => total + item.sub_total, 0);
+            }
+            //ambil data total keranjang
+            const total = calculateTotal(cartItems);
+            if (total <= 0) {
+                throw new Error('Cart tidak ditemukan');
+            }
+            //ambil data order
+            const dataOrder = {                
+                user_id: data.user_id,
+                total_price: total,
+                address_id: idAddress,
+                status: 'Pending',
+                order_date: `${data.tanggal} ${data.waktu}:00`,
+                active: true
+            };
+            //input data order ke tabel order
+            const order = await Order.create(dataOrder);
+            //looping data cart item dan input ke table order details
+            for (const item of cartItems) {
+                const dataCart = {
+                    order_id: order.order_id,
+                    cake_id: item.cake_id,
+                    quantity: item.quantity
+                };
+                // input ke table order details
+                const orderdetails = await orderDetailService.addOrderDetail(dataCart);
+            }
+            //ambil data payment
+            const dataPayment = {
+                order_id: order.order_id,
+                amount: total,
+                payment_method: data.paymentMethod
+            };
+            //input data order ke tabel payment
+            const payment = await paymentService.createPayment(dataPayment);
+            //delete cartitem by id usernya
+            const deleted = await cartItemService.deleteCartItemsByUserId(data.user_id);
+
+            
+
+            return order;
+            
+        } catch (error) {
+            console.error('Gagal menambahkan data order:', error);
             throw error;
         }
     }
