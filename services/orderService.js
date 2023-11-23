@@ -1,4 +1,4 @@
-const { Order, OrderDetail, Payment, Cake } = require("../models");
+const { Order, OrderDetail, Payment, Cake, Address } = require("../models");
 const PaymentService = require('./paymentService');
 const paymentService = new PaymentService();
 const OrderDetailService = require('./orderDetailService');
@@ -29,6 +29,9 @@ class OrderService {
                     },
                     {
                         model: Payment
+                    },
+                    {
+                        model: Address
                     }
                 ]
             });
@@ -41,6 +44,8 @@ class OrderService {
             throw error;
         }
     }
+
+    
 
     async getAllOrdersByUserId(userId) {
         try {
