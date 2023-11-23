@@ -32,7 +32,9 @@ class AddressService {
   //data by id
   async getAddressById(address_id) {
     try {
-      const address = await Address.findByPk(address_id);
+      const address = await Address.findAll({
+        where: { user_id: address_id }        
+      });
       if (!address) {
         throw new Error("Address tidak ditemukan");
       }
