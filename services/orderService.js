@@ -1,4 +1,4 @@
-const { Order, OrderDetail, Payment } = require("../models");
+const { Order, OrderDetail, Payment, Cake } = require("../models");
 const PaymentService = require('./paymentService');
 const paymentService = new PaymentService();
 const OrderDetailService = require('./orderDetailService');
@@ -46,7 +46,8 @@ class OrderService {
                 where: { user_id: userId, active: true },
                 include: [
                     {
-                        model: OrderDetail
+                        model: OrderDetail,
+                        include: [{ model: Cake }]
                     },
                     {
                         model: Payment
