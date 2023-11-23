@@ -3,9 +3,10 @@ const PaymentService = require('./paymentService');
 const paymentService = new PaymentService();
 const OrderDetailService = require('./orderDetailService');
 const orderDetailService = new OrderDetailService();
-const CartItemService = require('../services/cartItemService');
+const CartItemService = require('./cartItemService');
 const cartItemService = new CartItemService();
-
+const AddressService = require("./addressService");
+const addressService = new AddressService();
 
 class OrderService {
 
@@ -96,7 +97,9 @@ class OrderService {
                     phone_number: data.phone_number
                 };
 
-                idAddress = 1;
+                const Addaddress = await addressService.addAddress(dataAddress);
+
+                idAddress = Addaddress.address_id;
             }
             
             //ambil data list keranjang
