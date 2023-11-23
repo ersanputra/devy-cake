@@ -1,4 +1,4 @@
-const { Order } = require("../models");
+const { Order, OrderDetail, Payment } = require("../models");
 const PaymentService = require('./paymentService');
 const paymentService = new PaymentService();
 const OrderDetailService = require('./orderDetailService');
@@ -43,8 +43,16 @@ class OrderService {
     async getAllOrdersByUserId(userId) {
         try {
             const orders = await Order.findAll({
-                where: { user_id: userId, active: true }
-            });
+                where: { user_id: userId, active: true },
+                include: [
+                    {
+                        model: OrderDetail
+                    },
+                    {
+                        model: Payment
+                    }
+                ]
+              });
             return orders;
         } catch (error) {
             console.error('Error saat mengambil pesanan pengguna:', error);
