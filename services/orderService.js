@@ -24,7 +24,8 @@ class OrderService {
             const order = await Order.findByPk(orderId, {
                 include: [
                     {
-                        model: OrderDetail
+                        model: OrderDetail,
+                        include: [{ model: Cake }]
                     },
                     {
                         model: Payment
