@@ -17,9 +17,10 @@ const uploadImageApi = async (req, res) => {
         const imageUrl = await imageService.uploadToFirebase(req.file, 'images/profile/');
         let url = imageUrl;
         let modifiedUrl = url.replace('/images/profile/', '/images%2Fprofile%2F');
+        const encodedString = encodeURIComponent(imageUrl);
         res.status(200).json({
             message: 'File uploaded successfully.',
-            imageUrl: modifiedUrl
+            imageUrl: encodedString
         });
     } catch (error) {
         console.error('Error uploading the image:', error);
