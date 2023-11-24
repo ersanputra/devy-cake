@@ -7,6 +7,7 @@ const userRouter = require("./api/userRouter");
 const cakeRouter = require("./api/cakeRouter");
 const cartItemRouter = require("./api/cartItemRouter");
 const addressRouter = require("./api/addressRouter");
+const tokenRouter = require("./api/tokenRouter");
 const api = express.Router();
 
 
@@ -18,6 +19,6 @@ api.use("/users", userRouter)
 api.use("/cakes", cakeRouter)
 api.use("/cartitems", cartItemRouter)
 api.use("/addresses", addressRouter)
-
+api.use("/token", tokenRouter)
 
 module.exports = api;

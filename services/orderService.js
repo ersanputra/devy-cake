@@ -176,6 +176,31 @@ class OrderService {
         }
     }
 
+    async updateOrderStatusByInvoice(invoice, newStatus) {
+        try {
+            // Temukan order yang terkait dengan invoice dari tabel Payment
+            // Asumsikan ada relasi antara Payment dan Order dimana Payment memiliki field order_id
+            const payment = await Payment.findOne({ 
+                where: { invoice: invoice }
+            });
+            //console.log(invoice);
+            if (!payment) {
+                throw new Error('Order dengan invoice tersebut tidak ditemukan');
+            }
+            // Update status order
+            const order = await Order.findByPk(payment.order_id);
+            if (!order) {
+                throw new Error('Order tidak ditemukan');
+            }
+            order.status = newStatus;
+            await order.save();
+            return order;
+        } catch (error) {
+            console.error('Gagal memperbarui status order:', error);
+            throw error;
+        }
+    }
+
     async deleteOrder(orderId) {
         try {
             const order = await Order.findByPk(orderId);
@@ -192,5 +217,7 @@ class OrderService {
     }
 
 }
+
+
 
 module.exports = OrderService;

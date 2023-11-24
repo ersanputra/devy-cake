@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Payment.hasMany(models.Order, { foreignKey: 'order_id' });
-
     }
   }
   Payment.init({
