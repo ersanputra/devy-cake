@@ -20,7 +20,7 @@ app.post('/api/upload/profile', upload.single('image'), imageController.uploadIm
 
 // Konfigurasi middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(router);
 
