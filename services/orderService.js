@@ -12,12 +12,27 @@ class OrderService {
 
     async getOrderAll() {
         try {
-            return await Order.findAll({ where: { active: true } });
+            return await Order.findAll({
+                where: { active: true },
+                include: [
+                    {
+                        model: OrderDetail,
+                        include: [{ model: Cake }]
+                    },
+                    {
+                        model: Payment
+                    },
+                    {
+                        model: Address
+                    }
+                ]
+            });
         } catch (error) {
             console.error('Gagal mengambil data order:', error);
             throw error;
         }
     }
+    
 
     async getOrderById(orderId) {
         try {
