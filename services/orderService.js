@@ -1,4 +1,4 @@
-const { Order, OrderDetail, Payment, Cake, Address } = require("../models");
+const { Order, OrderDetail, Payment, Cake, Address, User } = require("../models");
 const PaymentService = require('./paymentService');
 const paymentService = new PaymentService();
 const OrderDetailService = require('./orderDetailService');
@@ -24,6 +24,9 @@ class OrderService {
                     },
                     {
                         model: Address
+                    },
+                    {
+                        model: User
                     }
                 ]
             });
