@@ -37,7 +37,7 @@ class UserService {
     async login(email, password) {
         // Cari pengguna berdasarkan email
         const user = await User.findOne({
-          where: { email: email }
+          where: { email: email,active: true }
         });
     
         if (!user) {
@@ -69,7 +69,7 @@ class UserService {
             }
 
             // Hapus pengguna
-            await User.destroy({
+            await User.update({ active: false },{
                 where: { user_id: userId }
             });
 
