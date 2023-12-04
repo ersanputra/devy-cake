@@ -340,8 +340,8 @@ orderRouter.put('/:orderId/status',checkToken, orderController.updateOrderStatus
 orderRouter.put('/status',checkToken, orderController.updateOrderStatusByInvoice);
 orderRouter.delete('/:orderId',checkToken, orderController.deleteOrder);
 
-//orderRouter.get('/count', orderController.getCountOrder);
-
+orderRouter.get('/count', orderController.getCountOrder);
+orderRouter.get('/counts', orderController.getCountOrder);
 
 
 
