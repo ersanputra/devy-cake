@@ -73,7 +73,7 @@ const checkToken = require("../../middlewares/checkToken");
  *              description: Internal server error
  */
 
-orderRouter.get('/',checkToken, orderController.getOrderAll);
+orderRouter.get('/', orderController.getOrderAll);
 
 
 /**

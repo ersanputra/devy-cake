@@ -241,7 +241,7 @@ userRouter.post('/login', userController.login);
 userRouter.delete('/:id', userController.deleteUser);
 
 
-userRouter.get('/',checkToken, userController.getUserAll);
-userRouter.get('/count',checkToken, userController.getCountUser);
+userRouter.get('/', userController.getUserAll);
+userRouter.get('/count', userController.getCountUser);
 
 module.exports = userRouter;

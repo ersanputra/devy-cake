@@ -61,7 +61,7 @@ const checkToken = require("../../middlewares/checkToken");
  *                                              example: "2023-11-19T00:07:49.364Z"
  */
 
-cakeRouter.get('/',checkToken, cakeController.getAllCakes);
+cakeRouter.get('/', cakeController.getAllCakes);
 
 /**
  * @swagger
