@@ -4,6 +4,25 @@ const bcrypt = require('bcrypt');
 class UserService {
     // ... (kode lainnya)
 
+    async getUserAll() {
+        try {
+          // return await User.findAll({ where: { active: true } });
+          return await User.findAll();
+        } catch (error) {
+          console.error("Gagal mengambil user:", error);
+          throw error;
+        }
+      }
+
+    async getCountUser() {
+        try {
+          const user = await User.count();
+          return { message: "Jumlah User Berhasil di munculkan.", user };
+        } catch (error) {
+          console.log("error saat menampilkan jumlah user");
+        }
+      }
+
     async createUser(userData) {
         try {
             // Validasi input (Anda mungkin ingin melakukan validasi yang lebih rumit di sini)

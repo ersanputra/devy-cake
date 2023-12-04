@@ -338,6 +338,7 @@ orderRouter.post('/', orderController.createOrder);
 orderRouter.put('/:orderId/status', orderController.updateOrderStatus);
 orderRouter.put('/status', orderController.updateOrderStatusByInvoice);
 orderRouter.delete('/:orderId', orderController.deleteOrder);
+orderRouter.get('/count', orderController.getCountOrder);
 
 
 

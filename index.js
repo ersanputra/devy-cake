@@ -2,13 +2,14 @@ const express = require('express');
 const router = require('./routers/router');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 const swagger = require('./config/swagger');
 //swagger
 swaggerJsdoc = require("swagger-jsdoc"),
 swaggerUi = require("swagger-ui-express");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 
 
 
