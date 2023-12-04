@@ -2,7 +2,7 @@ const express = require("express");
 const paymentRouter = express.Router();
 const PaymentController  = require('../../controllers/paymentController');
 const paymentController = new PaymentController ();
-const checkToken = require("../middlewares/checkToken");
+const checkToken = require("../../middlewares/checkToken");
 
 
 paymentRouter.post('/',checkToken, paymentController.createPayment);

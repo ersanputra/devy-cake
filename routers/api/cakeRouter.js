@@ -2,7 +2,7 @@ const express = require("express");
 const cakeRouter = express.Router();
 const CakeController   = require('../../controllers/cakeController');
 const cakeController  = new CakeController();
-const checkToken = require("../middlewares/checkToken");
+const checkToken = require("../../middlewares/checkToken");
 
 /**
  * @swagger

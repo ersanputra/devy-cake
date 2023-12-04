@@ -45,6 +45,21 @@ class AddressService {
     }
   }
 
+  async getAddressByUserId(userId) {
+    try {
+      const address = await Address.findAll({
+        where: { user_id: userId, active: true }        
+      });
+      if (!address) {
+        throw new Error("Address tidak ditemukan");
+      }
+      return address;
+    } catch (error) {
+      console.error("Error saat mengambil detail address:", error);
+      throw error;
+    }
+  }
+
 
 
   // delete address

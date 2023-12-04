@@ -1,7 +1,7 @@
 const express = require("express");
 const AddressController = require("../../controllers/addressController");
 const addressRouter = express.Router();
-const checkToken = require("../middlewares/checkToken");
+const checkToken = require("../../middlewares/checkToken");
 
 const addressController = new AddressController();
 /**
