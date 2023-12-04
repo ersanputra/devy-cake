@@ -11,7 +11,6 @@ const tokenRouter = require("./api/tokenRouter");
 const uploadRouter = require("./api/uploadRouter");
 const api = express.Router();
 
-
 api.use("/orders", orderRouter)
 api.use("/order-details", orderDetailRouter)
 api.use("/payments", paymentRouter)

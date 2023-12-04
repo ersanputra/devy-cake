@@ -2,6 +2,7 @@ const express = require("express");
 const orderDetailRouter = express.Router();
 const OrderDetailController  = require('../../controllers/orderDetailController');
 const orderDetailController  = new OrderDetailController();
+const checkToken = require("../middlewares/checkToken");
 
 
 orderDetailRouter.post('/', orderDetailController.addOrderDetail);

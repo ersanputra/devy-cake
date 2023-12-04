@@ -2,6 +2,7 @@ const express = require("express");
 const userRouter = express.Router();
 const UserController = require('../../controllers/userController');
 const userController = new UserController();
+const checkToken = require("../middlewares/checkToken");
 
 
 /**
@@ -240,7 +241,7 @@ userRouter.post('/login', userController.login);
 userRouter.delete('/:id', userController.deleteUser);
 
 
-userRouter.get('/', userController.getUserAll);
-userRouter.get('/count', userController.getCountUser);
+userRouter.get('/',checkToken, userController.getUserAll);
+userRouter.get('/count',checkToken, userController.getCountUser);
 
 module.exports = userRouter;

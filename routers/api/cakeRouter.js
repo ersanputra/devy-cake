@@ -2,6 +2,7 @@ const express = require("express");
 const cakeRouter = express.Router();
 const CakeController   = require('../../controllers/cakeController');
 const cakeController  = new CakeController();
+const checkToken = require("../middlewares/checkToken");
 
 /**
  * @swagger
@@ -60,7 +61,7 @@ const cakeController  = new CakeController();
  *                                              example: "2023-11-19T00:07:49.364Z"
  */
 
-cakeRouter.get('/', cakeController.getAllCakes);
+cakeRouter.get('/',checkToken, cakeController.getAllCakes);
 
 /**
  * @swagger
@@ -148,7 +149,7 @@ cakeRouter.get('/', cakeController.getAllCakes);
  *                                          example: "2023-12-03T02:25:10.763Z"
  */
 
-cakeRouter.post('/', cakeController.addCake);
+cakeRouter.post('/',checkToken, cakeController.addCake);
 
 /**
  * @swagger
@@ -196,7 +197,7 @@ cakeRouter.post('/', cakeController.addCake);
  *                                  example: "Tidak ada kue yang diperbarui dengan cake_id tersebut"
  */
 
-cakeRouter.delete('/:cake_id', cakeController.deleteCakeById);
+cakeRouter.delete('/:cake_id',checkToken, cakeController.deleteCakeById);
 
 
 module.exports = cakeRouter;

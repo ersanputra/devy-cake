@@ -2,6 +2,7 @@ const express = require("express");
 const orderRouter = express.Router();
 const OrderController = require('../../controllers/orderController');
 const orderController = new OrderController();
+const checkToken = require("../middlewares/checkToken");
 
 /**
  * @swagger
@@ -72,7 +73,7 @@ const orderController = new OrderController();
  *              description: Internal server error
  */
 
-orderRouter.get('/', orderController.getOrderAll);
+orderRouter.get('/',checkToken, orderController.getOrderAll);
 
 
 /**
@@ -159,7 +160,7 @@ orderRouter.get('/', orderController.getOrderAll);
  *                                  example: "Order tidak ditemukan"
  */
 
-orderRouter.get('/:orderId', orderController.getOrderDetails);
+orderRouter.get('/:orderId',checkToken, orderController.getOrderDetails);
 
 /**
  * @swagger
@@ -229,7 +230,7 @@ orderRouter.get('/:orderId', orderController.getOrderDetails);
  *                                              items:
  */
 
-orderRouter.get('/user/:userId', orderController.getUserOrders);
+orderRouter.get('/user/:userId',checkToken, orderController.getUserOrders);
 
 /**
  * @swagger
@@ -332,13 +333,13 @@ orderRouter.get('/user/:userId', orderController.getUserOrders);
  *                                  example: "Cart tidak ditemukan"
  */
 
-orderRouter.post('/all', orderController.addOrderAll);
+orderRouter.post('/all',checkToken, orderController.addOrderAll);
 
-orderRouter.post('/', orderController.createOrder);
-orderRouter.put('/:orderId/status', orderController.updateOrderStatus);
-orderRouter.put('/status', orderController.updateOrderStatusByInvoice);
-orderRouter.delete('/:orderId', orderController.deleteOrder);
-orderRouter.get('/count', orderController.getCountOrder);
+orderRouter.post('/',checkToken, orderController.createOrder);
+orderRouter.put('/:orderId/status',checkToken, orderController.updateOrderStatus);
+orderRouter.put('/status',checkToken, orderController.updateOrderStatusByInvoice);
+orderRouter.delete('/:orderId',checkToken, orderController.deleteOrder);
+orderRouter.get('/count',checkToken, orderController.getCountOrder);
 
 
 

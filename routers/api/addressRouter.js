@@ -1,6 +1,7 @@
 const express = require("express");
 const AddressController = require("../../controllers/addressController");
 const addressRouter = express.Router();
+const checkToken = require("../middlewares/checkToken");
 
 const addressController = new AddressController();
 /**
@@ -51,7 +52,7 @@ const addressController = new AddressController();
  *                                              type: string
  *                                              example: String
  */
-addressRouter.get('/', addressController.getAddressAll);
+addressRouter.get('/',checkToken, addressController.getAddressAll);
 
 /**
  * @swagger
@@ -179,7 +180,7 @@ addressRouter.get('/', addressController.getAddressAll);
  *                                          example: String
  */
 
-addressRouter.post('/', addressController.createAddress);
+addressRouter.post('/',checkToken, addressController.createAddress);
 
 /**
  * @swagger
@@ -264,7 +265,7 @@ addressRouter.post('/', addressController.createAddress);
  *                                  example: "Address tidak ditemukan"
  */
 
-addressRouter.put('/:address_id', addressController.updateAddress);
+addressRouter.put('/:address_id',checkToken, addressController.updateAddress);
 
 
 /**
@@ -313,9 +314,9 @@ addressRouter.put('/:address_id', addressController.updateAddress);
  *                                  example: "Address tidak ditemukan"
  */
 
-addressRouter.delete('/:address_id', addressController.deleteAddress);
+addressRouter.delete('/:address_id',checkToken, addressController.deleteAddress);
 
 
-//addressRouter.get('/user/:userId', addressController.getUserAddress);
+addressRouter.get('/user/:userId',checkToken, addressController.getUserAddress);
 
 module.exports = addressRouter;
