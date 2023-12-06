@@ -77,7 +77,7 @@ class UserService {
       async loginAdmin(email, password) {
         // Cari pengguna berdasarkan email
         const user = await User.findOne({
-          where: { email: email, role: "ADMIN" }
+          where: { email: email, active: true}
         });
     
         if (!user) {
