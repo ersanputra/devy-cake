@@ -74,7 +74,7 @@ class UserController {
       
               };
             
-            res.status(201).json({
+            res.status(200).json({
                 status: 'success',
                 data: objekUser,
                 message: 'Login Berhasil!'
@@ -104,8 +104,8 @@ class UserController {
                 accessToken: accessToken,
       
               };
-            
-            res.status(201).json({
+200
+            res.status(200).json({
                 status: 'success',
                 data: objekUser,
                 message: 'Login Berhasil!'
