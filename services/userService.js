@@ -56,7 +56,28 @@ class UserService {
     async login(email, password) {
         // Cari pengguna berdasarkan email
         const user = await User.findOne({
-          where: { email: email, active: true }
+          where: { email: email, active: true, role: "USER" }
+        });
+    
+        if (!user) {
+          throw new Error("Pengguna tidak ditemukan.");
+        }
+    
+        // Verifikasi password
+        const validPassword = await this.checkPassword(password, user.password);
+    
+        if (!validPassword) {
+          throw new Error("Password salah.");
+        }
+    
+        // Jika semua verifikasi sukses, kembalikan data pengguna
+        return user;
+      }
+
+      async loginAdmin(email, password) {
+        // Cari pengguna berdasarkan email
+        const user = await User.findOne({
+          where: { email: email, active: true, role: "ADMIN" }
         });
     
         if (!user) {
